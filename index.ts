@@ -12,7 +12,6 @@ app.use(
   }),
 );
 
-// See that server is running
 app.get("/", (_, res) => {
   res.status(200).send("VotarIA Server is running");
 });
