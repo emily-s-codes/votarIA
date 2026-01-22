@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { streamChat } from "../services/chat.service";
+import { stopStream, streamChat } from "../services/chat.service";
 
 export async function generateStream(req: Request, res: Response) {
   const { prompt, sessionId } = req.body;
@@ -26,8 +26,35 @@ export async function generateStream(req: Request, res: Response) {
     res.write("event: end\ndata:\n\n");
     res.end();
   } catch (err) {
-    console.error(err);
-    res.write("event: error\ndata: Streaming error\n\n");
-    res.end();
+    if (err instanceof Error && err.name === 'AbortError') {
+      console.log(`Stream aborted for session ${sessionId}`);
+      if (res.headersSent) {
+        res.write("event: aborted\ndata: Stream aborted by user\n\n");
+        res.end();
+      } else {
+        res.end();
+      }
+    } else {
+      console.error('Streaming error:', err);
+      if (!res.headersSent) {
+        res.write("event: error\ndata: Streaming error\n\n");
+        res.end();
+      } else {
+        res.end();
+      }
+    }
   }
+}
+
+export async function abortStream(req: Request, res: Response) {
+  const { sessionId } = req.params;
+
+  if (!sessionId || Array.isArray(sessionId)) {
+    res.status(400).json({ error: "A single valid sessionId is required" });
+    return;
+  }
+
+  stopStream(sessionId);
+
+  res.status(200).json({ message: `Streaming session ${sessionId} aborted` });
 }
