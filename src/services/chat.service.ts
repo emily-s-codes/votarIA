@@ -3,6 +3,8 @@ import { chain } from "../llm/gemini";
 const activeStreams = new Map<string, AbortController>();
 
 export async function streamChat(prompt: string, sessionId: string) {
+  stopStream(sessionId);
+
   const controller = new AbortController();
   activeStreams.set(sessionId, controller);
 
@@ -21,4 +23,8 @@ export function stopStream(sessionId: string) {
     controller.abort();
     activeStreams.delete(sessionId);
   }
+}
+
+export function endActiveStream(sessionId: string) {
+  activeStreams.delete(sessionId);
 }
