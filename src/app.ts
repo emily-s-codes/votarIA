@@ -1,9 +1,8 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import "../config";
 import chatRoute from "./routes/chat.routes";
-
-dotenv.config();
+import appRoute from "./routes/app.routes";
 
 const commonMiddleware = [
   cors({
@@ -17,6 +16,7 @@ const app = express();
 app.use(commonMiddleware);
 
 // Routes
+app.use("/", appRoute)
 app.use("/api/chat", chatRoute);
 
 export default app;
