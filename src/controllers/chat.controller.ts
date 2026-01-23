@@ -54,3 +54,43 @@ export async function abortStream(req: Request, res: Response) {
   stopStream(sessionId);
   res.status(200).json({ message: `Streaming session ${sessionId} aborted` });
 }
+
+export async function updateMessageStream(req: Request, res: Response) {
+  const { prompt, sessionId } = req.body;
+
+  if (!prompt || !sessionId) {
+    return res.status(400).json({ error: "prompt and sessionId are required" });
+  }
+
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+
+  try {
+    const stream = await streamChat(prompt, sessionId);
+
+    for await (const chunk of stream) {
+      const text = chunk.content?.toString();
+      if (text) {
+        res.write(`data: ${JSON.stringify({ text })}\n\n`);
+      }
+    }
+
+    res.write("event: end\ndata: {}\n\n");
+  } catch (err: any) {
+    const isAborted = err.name === 'AbortError' || err.message?.includes('abort');
+    
+    if (isAborted) {
+      console.log(`Stream interrupted for session ${sessionId} to start update.`);
+  
+    } else {
+      console.error('Update Stream Error:', err);
+      if (!res.writableEnded) {
+        res.write(`event: error\ndata: ${JSON.stringify({ message: "Error updating stream" })}\n\n`);
+      }
+    }
+  } finally {
+    endActiveStream(sessionId);
+    res.end();
+  }
+}
