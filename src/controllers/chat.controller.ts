@@ -8,10 +8,6 @@ export async function generateStream(req: Request, res: Response) {
     return res.status(400).json({ error: "prompt and sessionId are required" });
   }
 
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-
   try {
     const stream = await streamChat(prompt, sessionId);
 
@@ -61,10 +57,6 @@ export async function updateMessageStream(req: Request, res: Response) {
   if (!prompt || !sessionId) {
     return res.status(400).json({ error: "prompt and sessionId are required" });
   }
-
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
 
   try {
     const stream = await streamChat(prompt, sessionId);
