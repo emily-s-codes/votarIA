@@ -1,19 +1,11 @@
 import express from "express";
-import cors from "cors";
 import "../config";
 import chatRoute from "./routes/chat.routes";
 import appRoute from "./routes/app.routes";
-
-const commonMiddleware = [
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-  express.json(),
-];
+import { globalMiddleware } from "./middleware/globalMiddleware";
 
 const app = express();
-app.use(commonMiddleware);
+app.use(globalMiddleware);
 
 // Routes
 app.use("/", appRoute)
