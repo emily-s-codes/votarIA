@@ -20,19 +20,7 @@ export async function generateStream(req: Request, res: Response) {
 
     res.write("event: end\ndata: {}\n\n");
   } catch (err: any) {
-    const isAborted = err.name === 'AbortError' || err.message?.includes('abort');
-
-    if (isAborted) {
-      console.log(`Stream aborted for session ${sessionId}`);
-      if (!res.writableEnded) {
-        res.write("event: aborted\ndata: Stream stopped\n\n");
-      }
-    } else {
-      console.error('Streaming error:', err);
-      if (!res.writableEnded) {
-        res.write(`event: error\ndata: ${JSON.stringify({ message: "Internal server error" })}\n\n`);
-      }
-    }
+    handleStreamError(err, res, sessionId);
   } finally {
     endActiveStream(sessionId);
     res.end();
@@ -70,19 +58,21 @@ export async function updateMessageStream(req: Request, res: Response) {
 
     res.write("event: end\ndata: {}\n\n");
   } catch (err: any) {
-    const isAborted = err.name === 'AbortError' || err.message?.includes('abort');
-    
-    if (isAborted) {
-      console.log(`Stream interrupted for session ${sessionId} to start update.`);
-  
-    } else {
-      console.error('Update Stream Error:', err);
-      if (!res.writableEnded) {
-        res.write(`event: error\ndata: ${JSON.stringify({ message: "Error updating stream" })}\n\n`);
-      }
-    }
+    handleStreamError(err, res, sessionId);
   } finally {
     endActiveStream(sessionId);
     res.end();
+  }
+}
+
+function handleStreamError(err: any, res: Response, sessionId: string) {
+  const isAborted = err.name === 'AbortError' || err.message?.includes('abort');
+  if (isAborted) {
+    console.log(`Stream interrupted for session: ${sessionId}`);
+  } else {
+    console.error('Streaming error:', err);
+    if (!res.writableEnded) {
+      res.write(`event: error\ndata: ${JSON.stringify({ message: "Streaming error" })}\n\n`);
+    }
   }
 }
