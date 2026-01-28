@@ -1,0 +1,15 @@
+<div class="prompt">
+    <div class="input-wrapper">
+        <mat-form-field appearance="outline" class="full-width-input">
+            <input matInput 
+                   placeholder="Ask about a politician's platform..."
+                   [(ngModel)]="value"
+                   (keydown)="onKeydown($event)">
+            
+            <button mat-icon-button matSuffix  class="send-btn" (click)="submit()">
+                <mat-icon>send</mat-icon>
+            </button>
+            <mat-hint>VotarIA can make mistakes. Check important info.</mat-hint>
+        </mat-form-field>
+    </div>
+</div>

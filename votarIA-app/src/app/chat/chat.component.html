@@ -1,0 +1,15 @@
+<div class="app-container">
+  <app-topbar></app-topbar>
+  <main class="chat-area">
+    <div class="chat-column">
+      @for (msg of messages; track $index) {
+        <div class="message-bubble" 
+             [class.ai-message]="msg.from === 'ai'" 
+             [class.user-message]="msg.from === 'user'">
+          <p>{{ msg.text }}</p>
+        </div>
+      }
+    </div>
+  </main>
+  <app-prompt (send)="handleSend($event)"></app-prompt>
+</div>
