@@ -1,0 +1,64 @@
+
+/* 4. Footer e Input */
+.prompt {
+  width: 100%;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Customização para deixar a borda clara e o fundo suave */
+::ng-deep .full-width-input .mat-mdc-text-field-wrapper {
+  background-color: #ffffff !important; /* Fundo branco ou f9fafb */
+  border-radius: 16px !important;
+  font-size: 14px;
+}
+
+/* Altera a cor da borda do Angular Material (Outline) */
+::ng-deep .full-width-input .mdc-notched-outline__leading,
+::ng-deep .full-width-input .mdc-notched-outline__notch,
+::ng-deep .full-width-input .mdc-notched-outline__trailing {
+  border-color: #eee !important; /* Cinza clarinho (quase invisível) */
+  border-width: 1px !important;
+  border-radius: 10px;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.send-btn {
+  background-color: #f0f4f9 !important;
+  color: #6b7280 !important;
+  border-radius: 50% !important;
+  margin-right: 10px;
+}
+
+.send-btn:hover {
+  background-color: #f0f4f9 !important;
+  color: rgb(11, 87, 208) !important;
+  
+}
+/* Centraliza o container da dica/erro */
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: flex !important;
+  justify-content: center !important; /* Centraliza horizontalmente */
+  width: 100%;
+}
+
+/* Garante que o texto dentro dele também esteja centralizado */
+::ng-deep .mat-mdc-form-field-hint {
+  text-align: center !important;
+  width: 100%;
+  color: #9ca3af !important; /* Cor cinza clara como na imagem */
+  font-size: 11px !important;
+  margin-top: 4px;
+}
