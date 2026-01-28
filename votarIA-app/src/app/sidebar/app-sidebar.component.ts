@@ -1,29 +1,21 @@
-import { Component } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
   templateUrl: './app-sidebar.component.html',
-  styleUrls: ['./app-sidebar.component.scss'],
-  animations: [
-    trigger('sidebarAnimation', [
-      state('open', style({ width: '260px' })),
-      state('closed', style({ width: '70px' })),
-      transition('open <=> closed', animate('300ms ease-in-out'))
-    ])
-  ]
+  styleUrls: ['./app-sidebar.component.scss']
 })
 export class SidebarComponent {
-  isCollapsed = false;
+  isCollapsed = signal(false);
 
   navItems = [
-    { icon: 'add', label: 'New Chat', isButton: true },
-    { icon: 'home', label: 'Chat' },
+    { icon: 'chat_bubble_outline', label: 'Chat' },
     { icon: 'info', label: 'About' },
-    { icon: 'description', label: 'Public Sources' }
+    { icon: 'library_books', label: 'Sources' },
   ];
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.isCollapsed.update(v => !v);
   }
 }
