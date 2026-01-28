@@ -29,7 +29,7 @@ topbar {
 }
 
 .icon-container {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--box-shadow);
   background-color: transparent;
   border: none;
   border-radius: 10px;
