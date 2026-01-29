@@ -1,11 +1,13 @@
 {
-  "name": "angular.dev",
+  "name": "votaria-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "type": "module",
   "private": true,
@@ -32,6 +34,9 @@
     "@angular/material": "^21.1.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^16.11.35",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint-plugin-jsdoc": "^62.4.1",
     "typescript": "~5.9.2"
   }
 }
