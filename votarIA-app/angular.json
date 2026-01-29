@@ -49,8 +49,7 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/material-theme.scss",
-              "src/styles.css"
+              "src/material-theme.scss"
             ],
             "scripts": []
           },
