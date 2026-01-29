@@ -1,18 +1,10 @@
 import { chain } from "../llm/gemini";
 
-/**
- * Internal registry to track active AbortControllers for each session.
- * Used to manage and terminate ongoing AI streams.
- */
+/** Registry of active streams used for manual cancellation. */
 const activeStreams = new Map<string, AbortController>();
 
 /**
- * Initiates a streaming response from the AI model for a given prompt and session.
- * Automatically stops any existing stream for the same sessionId before starting a new one.
- * * @async
- * @param {string} prompt - The user input to send to the AI.
- * @param {string} sessionId - The unique identifier for the conversation session.
- * @returns {Promise<IterableReadableStream>} A stream of message chunks from the AI.
+ * Initiates an AI stream. Automatically cancels any existing stream for the session.
  */
 export async function streamChat(prompt: string, sessionId: string) {
   stopStream(sessionId);
@@ -30,12 +22,9 @@ export async function streamChat(prompt: string, sessionId: string) {
 }
 
 /**
- * Triggers the AbortSignal for a specific session's active stream.
- * This effectively cancels the underlying HTTP request to the AI provider.
- * * @param {string} sessionId - The ID of the session to be aborted.
- * @returns {void}
+ * Cancels the underlying HTTP request for a specific session.
  */
-export function stopStream(sessionId: string) {
+export function stopStream(sessionId: string): void {
   const controller = activeStreams.get(sessionId);
   if (controller) {
     controller.abort();
@@ -44,11 +33,8 @@ export function stopStream(sessionId: string) {
 }
 
 /**
- * Removes a session from the active streams map.
- * Should be called when a stream completes naturally to clean up memory.
- * * @param {string} sessionId - The ID of the session to clear.
- * @returns {void}
+ * Cleans up memory once a stream completes naturally.
  */
-export function endActiveStream(sessionId: string) {
+export function endActiveStream(sessionId: string): void {
   activeStreams.delete(sessionId);
 }

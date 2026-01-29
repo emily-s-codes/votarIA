@@ -2,13 +2,9 @@ import { Request, Response } from "express";
 import { stopStream, streamChat, endActiveStream } from "../services/chat.service";
 
 /**
- * Handles the generation of an AI response stream using Server-Sent Events (SSE).
- * Validates the presence of prompt and sessionId, manages the stream lifecycle, 
- * and handles graceful abortion or internal errors.
- * * @async
- * @param {Request} req - Express request object containing prompt and sessionId in the body.
- * @param {Response} res - Express response object used for streaming data chunks.
- * @returns {Promise<void>}
+ * Streams AI responses via Server-Sent Events (SSE).
+ * * @throws {400} If prompt or sessionId are missing.
+ * @remarks Ends with `event: end` on success or `event: aborted` if interrupted.
  */
 export async function generateStream(req: Request, res: Response) {
   const { prompt, sessionId } = req.body;
@@ -49,12 +45,8 @@ export async function generateStream(req: Request, res: Response) {
 }
 
 /**
- * Terminates an active streaming session based on the provided sessionId.
- * Validates that a single, valid sessionId is provided in the request parameters.
- * * @async
- * @param {Request} req - Express request object containing sessionId in the params.
- * @param {Response} res - Express response object.
- * @returns {Promise<void>}
+ * Terminates an active streaming session.
+ * @param req.params.sessionId - The unique identifier for the stream to kill.
  */
 export async function abortStream(req: Request, res: Response) {
   const { sessionId } = req.params;
