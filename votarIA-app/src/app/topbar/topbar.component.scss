@@ -1,14 +1,18 @@
 app-topbar {
   display: block;
-  height: 60px;
-  padding: var(--content-padding);
+  height: var(--top-bar-height);
+  background-color: var(--bg-main);
   box-shadow: var(--box-shadow);
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .topbar {
   width: 100%;
-  border-bottom: 1px solid #efefef;
-  background-color: #ffffff;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  background-color: var(--bg-main);
   display: flex;
   justify-content: center;
 }
@@ -30,16 +34,22 @@ app-topbar {
 
 .icon-container {
   box-shadow: var(--box-shadow);
-  background-color: transparent;
-  border: none;
+  background-color: var(--mat-sys-surface-container-low);
+  border: 1px solid var(--mat-sys-outline-variant);
   border-radius: 10px;
   padding: 8px;
   display: flex;
   align-items: center;
+  transition: all var(--transition-speed);
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
 }
 
 .icon-container mat-icon {
   font-size: 24px;
+  color: var(--primary-color); 
 }
 
 .title-group {
@@ -51,15 +61,27 @@ app-topbar {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-main);
 }
 
 .subtitle {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--mat-sys-on-surface-variant);
 }
 
 .logo-image {
   width: 40px;
   height: 40px;
+  object-fit: contain;
+}
+
+.theme-toggle-btn {
+  cursor: pointer;
+  color: var(--text-main);
+  transition: transform var(--transition-speed);
+
+  &:hover {
+    transform: rotate(15deg);
+    background-color: var(--mat-sys-surface-container-high);
+  }
 }

@@ -10,8 +10,8 @@
         <span class="subtitle">Ask about any Brazilian politician's platform</span>
       </div>
     </div>
-    <button class="icon-container">
-      <mat-icon>dark_mode</mat-icon>
+    <button class="icon-container theme-toggle-btn" (click)="toggleTheme()" aria-label="Toggle dark/light theme">
+      <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
   </div>
 </div>
