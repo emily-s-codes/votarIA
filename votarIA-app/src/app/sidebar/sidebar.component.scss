@@ -1,0 +1,115 @@
+@use 'sass:map';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.sidebar {
+  height: 100dvh;
+  width: var(--sidebar-width, 260px);
+  background-color: var(--mat-sys-surface) !important;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--transition-speed), background-color var(--transition-speed);
+  overflow: hidden;
+
+  &.collapsed {
+    width: 72px;
+  }
+}
+
+.sidebar-header {
+  height: calc(var(--top-bar-height) + 4px);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+
+  .menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--mat-sys-on-surface) !important;
+    display: flex;
+    padding: 0;
+    transition: color var(--transition-speed);
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--mat-sys-on-surface-variant) !important;
+  transition: background var(--transition-speed), color var(--transition-speed);
+  text-decoration: none;
+
+  .mat-icon {
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: var(--mat-sys-surface-container-high, #f3f4f6) !important;
+    color: var(--mat-sys-on-surface) !important;
+  }
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: var(--mat-sys-surface-container-highest) !important;
+  color: var(--mat-sys-on-surface) !important;
+  box-shadow: var(--box-shadow);
+  transition: all var(--transition-speed);
+
+  &:hover {
+    background-color: var(--mat-sys-primary-container) !important;
+    color: var(--mat-sys-on-primary-container, inherit) !important;
+    box-shadow: var(--box-shadow-hover);
+  }
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--mat-sys-on-surface) !important;
+    
+    .avatar {
+      width: 36px;
+      height: 36px;
+      background-color: var(--mat-sys-primary) !important;
+      color: var(--mat-sys-on-primary) !important;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+  }
+}
