@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PromptComponent } from '../prompt/prompt.component';
 import { TopbarComponent } from '../topbar/topbar.component';
-import { SidebarComponent } from "../sidebar/app-sidebar.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 /**
  * Represents a single message in the chat conversation.
