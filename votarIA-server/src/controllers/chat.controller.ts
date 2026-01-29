@@ -4,7 +4,7 @@ import { stopStream, streamChat, endActiveStream } from "../services/chat.servic
 /**
  * Streams AI responses via Server-Sent Events (SSE).
  * * @throws {400} If prompt or sessionId are missing.
- * @remarks Ends with `event: end` on success or `event: aborted` if interrupted.
+ * @event Ends with `event: end` on success or `event: aborted` if interrupted.
  */
 export async function generateStream(req: Request, res: Response) {
   const { prompt, sessionId } = req.body;

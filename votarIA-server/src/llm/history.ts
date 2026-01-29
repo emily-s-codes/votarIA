@@ -10,6 +10,9 @@ const SYSTEM_MESSAGE_TEXT = fs.readFileSync("src/llm/systemInstructions.txt", "u
 export class SessionChatHistory extends InMemoryChatMessageHistory {
   private systemMessage: SystemMessage;
 
+  /**
+   *
+   */
   constructor(systemMessageText?: string) {
     super();
     this.systemMessage = new SystemMessage(systemMessageText ?? SYSTEM_MESSAGE_TEXT);
