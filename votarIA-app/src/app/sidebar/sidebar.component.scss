@@ -1,5 +1,3 @@
-@use 'sass:map';
-
 :host {
   display: block;
   height: 100%;
@@ -17,6 +15,22 @@
 
   &.collapsed {
     width: 72px;
+
+    .label, 
+    .user-info {
+      font-family: inherit;
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      display: inline-block; 
+      overflow: hidden;
+    }
+
+    button {
+      span.label {
+        display: none;
+      }
+    }
   }
 }
 
@@ -34,6 +48,7 @@
     display: flex;
     padding: 0;
     transition: color var(--transition-speed);
+    // width: unset;
   }
 }
 
@@ -66,16 +81,15 @@
 }
 
 .btn-primary {
+  min-width: calc(100% - 48px);
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
   margin: 12px;
   padding: 12px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-weight: 500;
   background-color: var(--mat-sys-surface-container-highest) !important;
   color: var(--mat-sys-on-surface) !important;
   box-shadow: var(--box-shadow);
