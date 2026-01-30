@@ -5,10 +5,14 @@ import appRoute from "./routes/app.routes";
 import { globalMiddleware } from "./middleware/globalMiddleware";
 
 const app = express();
+
 app.use(globalMiddleware);
 
-// Routes
-app.use("/", appRoute)
+// --- Routes ---
+
+app.use("/", appRoute);
+
+/** Chat API namespace: streaming and session management. */
 app.use("/api/chat", chatRoute);
 
 export default app;

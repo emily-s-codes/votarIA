@@ -1,7 +1,10 @@
-import {Component} from '@angular/core';
-  import { MatIconModule } from '@angular/material/icon';
-  import { MatButtonModule } from '@angular/material/button';
+import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
+/**
+ * Global application header and navigation bar.
+ */
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -9,7 +12,4 @@ import {Component} from '@angular/core';
   standalone: true,
   imports: [MatButtonModule, MatIconModule]
 })
-export class TopbarComponent {
-  constructor() {    
-  }
-}
+export class TopbarComponent {}

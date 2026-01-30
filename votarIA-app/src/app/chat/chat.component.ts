@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { PromptComponent } from '../prompt/prompt.component';
 import { TopbarComponent } from '../topbar/topbar.component';
 
+/** Represents a single message in the chat conversation. */
 interface Message {
   from: 'user' | 'ai';
   text: string;
 }
 
+/**
+ * Main chat interface for message history and AI communication.
+ */
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -15,12 +19,18 @@ interface Message {
   imports: [TopbarComponent, PromptComponent]
 })
 export class ChatComponent {
+  
+  /** History of the current conversation, starting with a default greeting. */
   messages: Message[] = [
-    { from: 'ai', text: 'Hi, I\'m votarAI, how can I help you?' }
+    { from: 'ai', text: 'Hi, I\'m votarIA, how can I help you?' }
   ];
 
-  handleSend(text: string) {
+  /**
+   * Adds user message to history and triggers a simulated AI response delay.
+   */
+  handleSend(text: string): void {
     this.messages.push({ from: 'user', text });
+
     setTimeout(() => {
       this.messages.push({
         from: 'ai',

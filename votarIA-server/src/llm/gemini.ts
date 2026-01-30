@@ -8,6 +8,10 @@ const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_API_KEY!,
 });
 
+/**
+ * Orchestrates AI generation with automatic session-based history persistence.
+ * @see {@link getMessageHistory} for the underlying storage implementation.
+ */
 export const chain = new RunnableWithMessageHistory({
   runnable: model,
   getMessageHistory,

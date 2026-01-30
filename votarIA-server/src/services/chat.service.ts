@@ -1,7 +1,11 @@
 import { chain } from "../llm/gemini";
 
+/** Registry of active streams used for manual cancellation. */
 const activeStreams = new Map<string, AbortController>();
 
+/**
+ * Initiates an AI stream. Automatically cancels any existing stream for the session.
+ */
 export async function streamChat(prompt: string, sessionId: string) {
   stopStream(sessionId);
 
@@ -17,7 +21,10 @@ export async function streamChat(prompt: string, sessionId: string) {
   );
 }
 
-export function stopStream(sessionId: string) {
+/**
+ * Cancels the underlying HTTP request for a specific session.
+ */
+export function stopStream(sessionId: string): void {
   const controller = activeStreams.get(sessionId);
   if (controller) {
     controller.abort();
@@ -25,6 +32,9 @@ export function stopStream(sessionId: string) {
   }
 }
 
-export function endActiveStream(sessionId: string) {
+/**
+ * Cleans up memory once a stream completes naturally.
+ */
+export function endActiveStream(sessionId: string): void {
   activeStreams.delete(sessionId);
 }

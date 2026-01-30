@@ -5,6 +5,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * Input component for user prompts. 
+ * Supports 'Enter' to submit and 'Shift+Enter' for new lines.
+ */
 @Component({
   selector: 'app-prompt',
   templateUrl: './prompt.component.html',
@@ -19,6 +23,7 @@ export class PromptComponent {
 
   value = '';
 
+  /** Prevents newline on 'Enter' to trigger submission. */
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
@@ -26,11 +31,10 @@ export class PromptComponent {
     }
   }
 
+  /** Trims input and emits non-empty strings. */
   submit() {
     const text = this.value.trim();
     if (!text) return;
-
-    console.log('Submitting prompt:', text);
 
     this.send.emit(text);
     this.value = '';

@@ -1,13 +1,16 @@
 import { GoogleGenAI } from "@google/genai";
-import dotenv from "dotenv";
+import '../../config';
 
-dotenv.config();
-
+/** * SDK entry point. Requires `GOOGLE_API_KEY` in environment. 
+ */
 const ai = new GoogleGenAI({
   apiKey: process.env.GOOGLE_API_KEY!,
 });
 
-async function listModels() {
+/**
+ * Lists available models to verify API key permissions and model availability.
+ */
+async function listModels(): Promise<void> {
   try {
     console.log("Available models:");
     const modelsPager = await ai.models.list();
