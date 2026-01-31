@@ -1,11 +1,9 @@
-import {Component} from '@angular/core';
-  import { MatIconModule } from '@angular/material/icon';
-  import { MatButtonModule } from '@angular/material/button';
-  
+import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 /**
- * @component TopbarComponent
- * @description A standalone navigation or header component that displays the application's top bar, 
- * utilizing Angular Material buttons and icons.
+ * Global application header and navigation bar.
  */
 @Component({
   selector: 'app-topbar',
@@ -14,7 +12,4 @@ import {Component} from '@angular/core';
   standalone: true,
   imports: [MatButtonModule, MatIconModule]
 })
-export class TopbarComponent {
-  constructor() {    
-  }
-}
+export class TopbarComponent {}

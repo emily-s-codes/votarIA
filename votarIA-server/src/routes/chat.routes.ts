@@ -5,22 +5,12 @@ import { sseMiddleware } from "../middleware/sse";
 const router = Router();
 
 /**
- * Route to initiate a Server-Sent Events (SSE) stream for AI chat responses.
- * Applies sseMiddleware to set appropriate headers before invoking the generator.
- * @name post/generate-stream
- * @function
- * @memberof module:routers/chat
- * @inner
+ * Initiates an AI chat response via Server-Sent Events.
  */
 router.post("/generate-stream", sseMiddleware, generateStream);
 
 /**
- * Route to abort an active AI stream for a specific session.
- * @name delete/generate-stream/:sessionId
- * @function
- * @memberof module:routers/chat
- * @inner
- * @param {string} sessionId - The unique identifier of the session to terminate.
+ * Aborts an active streaming session.
  */
 router.delete("/generate-stream/:sessionId", abortStream);
 
