@@ -1,37 +1,135 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-html {
-  height: 100%;
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+@font-face {
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('assets/fonts/Roboto-Medium.ttf') format('truetype');
+  font-weight: 500;
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/MaterialIcons-Regular.ttf') format('truetype');
+}
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga' 1;
+  font-feature-settings: 'liga' 1;  
+  -webkit-font-smoothing: antialiased;
+}
 
-  // Reset the user agent margin.
+:root {
+  --primary-color: #605DC8;
+  --secondary-color: #8B89E6;
+  --bg-main: #ffffff;
+  --text-main: #1f2937;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --box-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  --top-bar-height: 60px;
+  --sidebar-width: 260px;
+}
+
+$my-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    plain-family: 'Roboto',
+  ),
+  density: (scale: 0)
+));
+
+html {
+  @include mat.all-component-themes($my-theme);
+  --mat-sys-primary: var(--primary-color);
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-surface: var(--bg-main);
+  --mat-sys-on-surface: var(--text-main);
+  --mat-sys-on-surface-variant: #6b7280;
+  --mat-sys-outline-variant: #eee;
+  --mat-sys-surface-container: #f9fafb;
+  --mat-sys-surface-container-highest: #f3f4f6;
+}
+
+.dark-theme {
+  --bg-main: #111827;
+  --text-main: #f9fafb;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --box-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+
+  @include mat.all-component-colors($my-theme);
+  @include mat.typography-hierarchy($my-theme);
+  font-family: 'Roboto', sans-serif;
+
+  --mat-sys-surface: var(--bg-main);
+  --mat-sys-on-surface: var(--text-main);
+  --mat-sys-on-surface-variant: #9ca3af; 
+  --mat-sys-outline-variant: #374151;
+  --mat-sys-surface-container: #1f2937; 
+  --mat-sys-surface-container-highest: #374151; 
+}
+
+* {
   margin: 0;
-  height: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$theme-transition: 
+  background-color var(--transition-speed), 
+  color var(--transition-speed), 
+  border-color var(--transition-speed), 
+  box-shadow var(--transition-speed),
+  fill var(--transition-speed);
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  height: 100vh;
+}
+
+body, 
+::ng-deep .mat-mdc-text-field-wrapper {
+  transition: $theme-transition !important;
+  
+  p, span, h1, h2, h3, mat-icon, input, textarea {
+    transition: color var(--transition-speed) !important;
+  }
+}
+
+.message-bubble {
+  will-change: background-color, color;
+}
+
+button, input, textarea, span.label {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1rem !important;
 }

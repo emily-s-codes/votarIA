@@ -2,6 +2,7 @@
  * Initial payload for generating an AI response.
  */
 export interface GenerateRequest {
+  /** The text prompt or question to be processed by the AI model. */
   prompt: string;
 }
 

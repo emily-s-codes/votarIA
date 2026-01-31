@@ -17,10 +17,13 @@ import { FormsModule } from '@angular/forms';
   imports: [MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule]
 })
 export class PromptComponent {
+  /** Emits the processed string content when the user submits the prompt. */
   @Output() send = new EventEmitter<string>();
 
+  /** Reference to the underlying HTML textarea element for DOM manipulation or focus management. */
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
+  /** The current raw string value bound to the textarea input. */
   value = '';
 
   /** Prevents newline on 'Enter' to trigger submission. */

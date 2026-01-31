@@ -27,6 +27,9 @@ export class SessionChatHistory extends InMemoryChatMessageHistory {
   }
 }
 
+/** * Internal storage mapping session IDs to their respective history instances.
+ * @type {Map<string, SessionChatHistory>} 
+ */
 const store = new Map<string, SessionChatHistory>();
 
 /**

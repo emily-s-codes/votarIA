@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PromptComponent } from '../prompt/prompt.component';
 import { TopbarComponent } from '../topbar/topbar.component';
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 /** Represents a single message in the chat conversation. */
 interface Message {
@@ -16,7 +17,7 @@ interface Message {
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   standalone: true,
-  imports: [TopbarComponent, PromptComponent]
+  imports: [TopbarComponent, PromptComponent, SidebarComponent]
 })
 export class ChatComponent {
   

@@ -1,0 +1,28 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed()">
+  <div class="sidebar-header">
+    <button class="menu-btn" (click)="toggleSidebar()" aria-label="Toggle menu">
+      <span class="material-icons">menu</span>
+    </button>
+  </div>
+
+  <nav class="nav-list">
+    <div class="new-chat-wrapper">
+      <button class="btn-primary">
+        <div class="icon-wrapper">
+          <span class="material-icons">add</span>
+        </div>
+        <span class="label" [class.hidden]="isCollapsed()">New Chat</span>
+      </button>
+    </div>
+
+    @for (item of navItems; track item.label) {
+      <div class="nav-item">
+        <div class="icon-wrapper">
+          <span class="material-icons">{{ item.icon }}</span>
+        </div>
+        <span class="label" [class.hidden]="isCollapsed()">{{ item.label }}</span>
+      </div>
+    }
+  </nav>
+
+</aside>
