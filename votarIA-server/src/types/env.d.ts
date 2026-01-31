@@ -1,20 +1,18 @@
 /**
- * Extends the global NodeJS namespace to provide strong typing for environment variables.
- * This ensures that the application has access to the necessary configuration 
- * and API keys during runtime.
+ * Global NodeJS environment variable overrides.
  */
 declare namespace NodeJS {
   /**
    * Defines the structure of the process.env object.
    */
   interface ProcessEnv {
-    /** * The port number on which the Express server will listen. 
-     * Optional: defaults to a system-assigned port or 3000 if not provided.
+    /** * Port for the Express server. 
+     * @default 3000
      */
     PORT?: string;
 
-    /** * The authentication key for the Google Gemini API. 
-     * Required for the LangChain/Google Generative AI integration to function.
+    /** * Google Gemini API key. 
+     * @required 
      */
     GOOGLE_API_KEY: string;
   }
