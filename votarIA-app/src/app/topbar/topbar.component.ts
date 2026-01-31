@@ -4,9 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ThemeService } from '../core/services/theme.service';
 
 /**
- * @component TopbarComponent
- * @description A standalone navigation or header component that displays the application's top bar, 
- * utilizing Angular Material buttons and icons.
+ * Global application header and navigation bar.
  */
 @Component({
   selector: 'app-topbar',

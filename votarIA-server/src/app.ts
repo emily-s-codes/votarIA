@@ -10,22 +10,13 @@ import { globalMiddleware } from "./middleware/globalMiddleware";
  */
 const app = express();
 
-/**
- * Initializes and applies the global middleware stack (CORS, JSON parsing, etc.) 
- * to all incoming requests.
- */
 app.use(globalMiddleware);
 
-// Routes
+// --- Routes ---
 
-/**
- * Mounts the base application routes (e.g., health checks) at the root path.
- */
 app.use("/", appRoute);
 
-/**
- * Mounts the chat-specific API routes (streaming and abortion) under the /api/chat namespace.
- */
+/** Chat API namespace: streaming and session management. */
 app.use("/api/chat", chatRoute);
 
 export default app;

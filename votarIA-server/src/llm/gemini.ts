@@ -14,14 +14,8 @@ const model = new ChatGoogleGenerativeAI({
 });
 
 /**
- * A LangChain Runnable sequence that automatically manages chat history.
- * * @constant chain
- * @description This wrapper ensures that every model invocation automatically 
- * retrieves previous messages from the history provider and persists the 
- * new exchange back to the storage.
- * * @property {ChatGoogleGenerativeAI} runnable - The underlying AI model to execute.
- * @property {Function} getMessageHistory - The factory function used to retrieve 
- * session-specific message history based on a provided sessionId.
+ * Orchestrates AI generation with automatic session-based history persistence.
+ * @see {@link getMessageHistory} for the underlying storage implementation.
  */
 export const chain = new RunnableWithMessageHistory({
   runnable: model,
