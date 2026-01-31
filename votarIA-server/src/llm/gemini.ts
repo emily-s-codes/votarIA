@@ -8,7 +8,7 @@ import { getMessageHistory } from "./history";
  * for real-time response generation.
  */
 const model = new ChatGoogleGenerativeAI({
-  model: "models/gemini-1.5-flash",
+  model: "models/gemini-2.5-flash",
   streaming: true,
   apiKey: process.env.GOOGLE_API_KEY!,
 });

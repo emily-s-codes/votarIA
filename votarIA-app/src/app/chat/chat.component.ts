@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { PromptComponent } from '../prompt/prompt.component';
 import { TopbarComponent } from '../topbar/topbar.component';
+import { ChatService } from '../../services/chat.service';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 
 /** Represents a single message in the chat conversation. */
@@ -23,20 +24,56 @@ export class ChatComponent {
   
   /** History of the current conversation, starting with a default greeting. */
   messages: Message[] = [
-    { from: 'ai', text: 'Hi, I\'m votarIA, how can I help you?' }
+    { from: 'ai', text: "Hi, I'm votarIA, how can I help you?" }
   ];
 
-  /**
-   * Adds user message to history and triggers a simulated AI response delay.
+  private sessionId = crypto.randomUUID();
+  streaming = false;
+
+  constructor(private chatService: ChatService, private cdr: ChangeDetectorRef) {}
+
+   /**
+   * Adds user message to history and triggers the AI streaming response.
    */
-  handleSend(text: string): void {
+  async handleSend(text: string) {
+    if (this.streaming) {
+      this.chatService.abort();
+      this.streaming = false;
+    }
+
+    // User message
     this.messages.push({ from: 'user', text });
 
-    setTimeout(() => {
-      this.messages.push({
-        from: 'ai',
-        text: 'AI answer'
-      });
-    }, 600);
+    // AI placeholder with typing cursor ON
+    const aiMessage: Message = {
+      from: 'ai',
+      text: ''
+    };
+
+    this.messages.push(aiMessage);
+    this.streaming = true;
+
+    try {
+      await this.chatService.streamChat(
+        text,
+        this.sessionId,
+        (chunk) => {
+          aiMessage.text += chunk;
+          this.cdr.detectChanges();
+        }
+      );
+    } catch (err) {
+      aiMessage.text += '\n\n⚠️ Error generating response.';
+    } finally {
+      this.streaming = false;
+    }
+  }
+
+  /**
+   * Stops the current AI streaming session.
+   */
+  stop() {
+    this.chatService.abort();
+    this.streaming = false;
   }
 }
