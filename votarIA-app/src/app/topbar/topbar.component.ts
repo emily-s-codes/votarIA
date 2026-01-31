@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ThemeService } from '../core/services/theme.service';
 
 /**
  * Global application header and navigation bar.
@@ -12,4 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [MatButtonModule, MatIconModule]
 })
-export class TopbarComponent {}
+export class TopbarComponent {
+  themeService = inject(ThemeService);
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+    console.log('Theme toggled', this.themeService.isDarkMode());
+  }
+}
