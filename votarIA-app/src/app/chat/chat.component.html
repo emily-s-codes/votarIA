@@ -12,7 +12,7 @@
             <div class="icon-loader">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%0">
+                  <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#2F5E3E" />
                     <stop offset="100%" stop-color="#F2D35E" />
                   </linearGradient>
@@ -31,6 +31,6 @@
       }
     </div>
   </main>
-  <app-prompt (send)="handleSend($event)"></app-prompt>
+  <app-prompt (send)="handleSend($event)" (cancel)="stop()" [streaming]="streaming"></app-prompt>
 </div>
 </div>

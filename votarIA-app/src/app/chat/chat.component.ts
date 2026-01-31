@@ -74,6 +74,7 @@ export class ChatComponent {
    */
   stop() {
     this.chatService.abort();
+    this.messages[this.messages.length - 1].text += '\n\n⚠️ Response generation stopped by user.';
     this.streaming = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, ElementRef, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 export class PromptComponent {
   /** Emits the processed string content when the user submits the prompt. */
   @Output() send = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter<void>();
+  @Input() streaming: boolean = false;
 
   /** Reference to the underlying HTML textarea element for DOM manipulation or focus management. */
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
@@ -41,5 +43,6 @@ export class PromptComponent {
 
     this.send.emit(text);
     this.value = '';
-  }  
+  }
+
 }
