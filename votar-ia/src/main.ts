@@ -16,6 +16,5 @@ async function bootstrap() {
   await app.listen(port, '0.0.0.0'); 
   
   console.log(`Backend running on port: ${port}`);
-  //testing github actions 
 }
 bootstrap();
