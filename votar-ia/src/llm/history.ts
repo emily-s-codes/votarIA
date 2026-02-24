@@ -1,8 +1,13 @@
 import fs from "fs";
+import path from "path";
 import { InMemoryChatMessageHistory } from "@langchain/core/chat_history";
 import { SystemMessage, BaseMessage } from "@langchain/core/messages";
 
-const SYSTEM_MESSAGE_TEXT = fs.readFileSync("src/llm/systemInstructions.txt", "utf-8");
+const instructionsPath = process.env.NODE_ENV === 'production' 
+  ? path.join(__dirname, "systemInstructions.txt")
+  : path.join(process.cwd(), "src", "llm", "systemInstructions.txt");
+  
+const SYSTEM_MESSAGE_TEXT = fs.readFileSync(instructionsPath, "utf-8");
 
 /**
  * In-memory history that prepends a persistent system prompt to all conversation contexts.
