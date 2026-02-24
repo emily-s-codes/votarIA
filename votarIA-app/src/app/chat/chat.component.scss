@@ -79,3 +79,46 @@
     padding: 0 16px;
   }
 }
+.icon-loader {
+  width: 25px;
+  height: 25px;
+
+  /* This creates the circle */
+  border-radius: 50%; 
+  background: rgba(47, 94, 62, 0.05); /* Subtle background tint */
+  border: 1px solid rgba(242, 211, 94, 0.2); /* Optional thin border */
+  
+  /* This ensures the glow doesn't bleed out into a square shape */
+  overflow: hidden;
+}
+
+.icon-path {
+  stroke-dasharray: 60; 
+  stroke-dashoffset: 60;
+  stroke-linecap: round;
+  /* Animating the line and the color glow */
+  animation: run-the-line 2.5s linear infinite, color-glow 2.5s ease-in-out infinite;
+  
+}
+
+@keyframes run-the-line {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -60;
+  }
+}
+
+@keyframes color-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 2px #2F5E3E); 
+  }
+  50% { 
+    filter: drop-shadow(0 0 10px #F2D35E); 
+    fill: rgba(242, 211, 94, 0.2); /* Slight fill pulse */
+  }
+}

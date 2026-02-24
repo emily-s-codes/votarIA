@@ -9,6 +9,8 @@ export const globalMiddleware = [
   cors({
     origin: true,
     credentials: true,
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    optionsSuccessStatus: 200,
   }),
   express.json(),
 ];
