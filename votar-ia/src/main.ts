@@ -6,7 +6,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   app.enableCors({
-    origin: true,
+    origin: [
+      'https://gen-lang-client-0373102396.web.app/', // Firebase frontend URL
+      'http://localhost:4200'                        // Local testing URL
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
 
@@ -16,7 +20,5 @@ async function bootstrap() {
   await app.listen(port, '0.0.0.0'); 
   
   console.log(`Backend running on port: ${port}`);
-  //test
 }
 bootstrap();
-//TEST
