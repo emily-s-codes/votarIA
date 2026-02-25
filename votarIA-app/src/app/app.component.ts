@@ -15,5 +15,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class App {
-  title = 'VotarIA';
+  title = 'votarIA';
 }

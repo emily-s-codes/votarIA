@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "votaria-app/dist/votarIA",
+    "public": "votarIA-app/dist/votarIA",
     "ignore": [
       "firebase.json",
       "**/.*",
