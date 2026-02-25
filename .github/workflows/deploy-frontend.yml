@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'votaria-app/**'
+      - 'votarIA-app/**'
 
 jobs:
   build_and_deploy:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          cd votaria-app
+          cd votarIA-app
           npm install
           npm run build -- --configuration=production
 
