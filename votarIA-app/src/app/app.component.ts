@@ -16,4 +16,5 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
   title = 'VotarIA';
+  // testing firebase integration
 }
