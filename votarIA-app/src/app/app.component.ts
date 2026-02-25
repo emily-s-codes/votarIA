@@ -15,5 +15,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class App {
-  title = 'VotarIA';
+  title = 'VotarIA'; // The title of the application, used for display purposes in the UI.
 }
