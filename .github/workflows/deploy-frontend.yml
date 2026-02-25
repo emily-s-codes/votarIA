@@ -1,0 +1,27 @@
+name: Deploy Frontend to Firebase
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'votaria-app/**'
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install and Build
+        run: |
+          cd votaria-app
+          npm install
+          npm run build -- --configuration=production
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.GCP_SA_KEY }}
+          projectId: ${{ secrets.GCP_PROJECT_ID }}
+          channelId: live
