@@ -7,8 +7,10 @@ async function bootstrap() {
   
   app.enableCors({
     origin: [
-      'https://gen-lang-client-0373102396.web.app/', // Firebase frontend URL
-      'http://localhost:4200'                        // Local testing URL
+      'https://gen-lang-client-0373102396.web.app',   // Firebase frontend URL
+      'http://localhost:4200',                        // Local testing URL
+      'https://votaria-app.com.br',                   // Domain
+      'https://www.votaria-app.com.br'                // Domain with www
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
